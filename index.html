@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portofolio Muhammad Fizram</title>
 <style>
-/* ==== STYLE ==== */
+/* ==== STYLE GLOBAL ==== */
 * {
   margin: 0;
   padding: 0;
@@ -18,19 +18,40 @@ body {
   color: #fff;
   text-shadow: 0 0 10px #000;
   overflow-x: hidden;
+  background: url('background.jpg') no-repeat center center fixed; 
+  background-size: cover;
 }
 
-/* ==== HEADER ==== */
+/* --- OVERLAY --- */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+/* ==== HEADER (DEFAULT - Tengah) ==== */
 header {
-  text-align: center;
+  /* PENTING: Tambahkan background-color solid sebagai fallback */
+  background-color: #000000; /* Warna solid dasar */
+  background: linear-gradient(135deg, #a00000, #000000); /* Tetap gunakan gradient */
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
   padding: 25px 20px 5px;
-  background: linear-gradient(135deg, #a00000, #000000);
   border-bottom: 3px solid #ff0000;
   border-radius: 0 0 60px 60px;
   box-shadow: 0 6px 25px rgba(255, 0, 0, 0.4);
-  position: relative;
-  z-index: 2;
+  position: sticky; 
+  top: 0;
+  z-index: 10; /* Tingkatkan z-index agar pasti di atas segalanya */
+  transition: all 0.4s ease-in-out; 
 }
+
+/* Foto Profil Default */
 header img {
   width: 158px;
   height: 158px;
@@ -39,41 +60,80 @@ header img {
   box-shadow: 0 0 20px #ff0000;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: all 0.4s ease-in-out, transform 0.4s ease, box-shadow 0.4s ease;
 }
 header img:hover {
   transform: scale(1.15);
   box-shadow: 0 0 60px #ff0000;
   cursor: pointer;
 }
+header a {
+    line-height: 0;
+    margin: 0;
+    transition: margin 0.4s ease-in-out; 
+}
+
+/* Container Nama dan Jabatan Default */
+.info {
+    text-align: center; 
+    position: relative; 
+    transform: translateX(0);
+    transition: all 0.4s ease-in-out;
+}
 header h1 {
   font-size: 2.5em;
   margin-top: 15px;
   color: #ffffff;
+  transition: all 0.4s ease-in-out;
 }
 header h3 {
   color: #ffaaaa;
   font-weight: 400;
   margin-top: 5px;
+  transition: opacity 0.4s ease-in-out;
 }
 
-/* ==== ISI (BODY) ==== */
+/* --- STYLE KETIKA SCROLL (Mengecil dan Geser ke Kiri) --- */
+header.scrolled {
+    padding: 10px 25px; 
+    border-radius: 0 0 20px 20px; 
+    box-shadow: 0 4px 20px rgba(255, 0, 0, 0.6);
+    background-color: #000000; /* Pastikan juga solid saat scrolled */
+    background: linear-gradient(135deg, #a00000, #000000); /* Tetap gunakan gradient */
+    
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: flex-start; 
+}
+header.scrolled a {
+    margin-right: 15px; 
+    margin-left: 0; 
+}
+header.scrolled img {
+    width: 50px; 
+    height: 50px;
+    border-width: 2px;
+    box-shadow: 0 0 10px #ff0000;
+}
+header.scrolled .info {
+    transform: translateX(0); 
+    text-align: left; 
+}
+header.scrolled h1 {
+    font-size: 1.2em; 
+    margin-top: 0; 
+}
+header.scrolled h3 {
+    display: none; 
+}
+
+/* ==== ISI UTAMA (MAIN) ==== */
 main {
   position: relative;
-  z-index: 1;
-  margin-top: -45px;
-  margin-bottom: -40px;
-  background: url('Background.jpg') no-repeat center center;
-  background-size: cover;
-  padding: 80px 0 140px; /* ditambah bawah agar tidak ketutup footer */
-}
-main::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 0;
+  z-index: 1; 
+  margin-top: -30px; 
+  margin-bottom: 0; 
+  padding: 80px 0 50px; 
 }
 section {
   max-width: 900px;
@@ -100,9 +160,6 @@ section h2 {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-section p { text-align: justify; }
-
-/* Paragraf */
 section p b { color: #fff; }
 section p a {
   color: #ffffff;
@@ -115,8 +172,8 @@ section p a:hover {
   text-shadow: 0 0 10px #ff0000;
   text-decoration: underline;
 }
+section p { text-align: justify; }
 
-/* ==== UL & LI ==== */
 ul {
   list-style: none;
   line-height: 1.2;
@@ -133,7 +190,11 @@ ul li {
   transition: background-color 0.3s ease;
 }
 ul li:hover { background-color: rgba(60, 60, 60, 0.9); }
-ul li b { display: block; margin-bottom: 2px; font-weight: 700; } 
+ul li b { 
+  display: block; 
+  margin-bottom: 2px; 
+  font-weight: 700; 
+} 
 ul li span.detail {
   display: block;
   font-size: 0.9em;
@@ -142,7 +203,6 @@ ul li span.detail {
   line-height: 1.2;
 }
 
-/* Pendidikan dua kolom */
 main section:nth-of-type(2) ul {
   display: flex;
   flex-wrap: wrap;
@@ -153,7 +213,6 @@ main section:nth-of-type(2) ul li {
   margin-bottom: 20px;
 }
 
-/* Keahlian (kotak kecil) */
 main section:nth-of-type(4) ul {
   display: flex;
   flex-wrap: wrap;
@@ -172,6 +231,7 @@ main section:nth-of-type(4) ul li {
   font-weight: 600;
   color: #fff;
   transition: all 0.3s ease;
+  list-style: none; 
 }
 main section:nth-of-type(4) ul li:hover {
   background-color: #ff0000;
@@ -179,13 +239,13 @@ main section:nth-of-type(4) ul li:hover {
   cursor: pointer;
 }
 
-/* Kontak */
 .contact { text-align: center; }
 .contact a { 
   text-decoration: none; 
   font-weight: bold; 
   color: #ffaaaa; 
-}
+} 
+
 .contact-list {
   display: flex;
   justify-content: center; 
@@ -225,7 +285,6 @@ main section:nth-of-type(4) ul li:hover {
   transform: scale(1.1); 
 }
 
-/* Sertifikasi */
 #sertifikasi {
   margin: 40px auto;
   padding: 20px 30px; 
@@ -273,39 +332,32 @@ main section:nth-of-type(4) ul li:hover {
   color: #ddd;
   font-size: 0.9em;
   display: inline-block;
+  margin-top: 0;
   line-height: 1.2;
 }
 @media (max-width: 768px) {
   #sertifikasi ul li { width: 100%; }
 }
 
-/* ==== FOOTER (LEMBUT TUMPANG TINDIH) ==== */
+/* ==== FOOTER ==== */
 footer {
+  /* Latar belakang SOLID */
+  background-color: #000000; /* Warna solid dasar */
+  background: linear-gradient(135deg, #000000, #a00000); 
+  
   text-align: center;
   padding: 20px 20px 25px;
-  background: linear-gradient(135deg, #000000, #a00000); 
   border-top: 3px solid #ff0000;
   border-radius: 60px 60px 0 0; 
   box-shadow: 0 -6px 25px rgba(255, 0, 0, 0.4);
   position: relative;
-  z-index: 3;
-  margin-top: -80px; /* efek tumpang tindih lembut */
-  backdrop-filter: blur(6px);
-}
-footer::before {
-  content: "";
-  position: absolute;
-  top: -40px; left: 0;
-  width: 100%; height: 40px;
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
-  border-radius: 60px 60px 0 0;
-  z-index: -1;
+  z-index: 2; 
+  margin-top: 40px; 
 }
 footer p {
   color: #ff4444;
   font-size: 1.1em;
   font-weight: 600;
-  text-shadow: 0 0 8px #000;
 }
 </style>
 </head>
@@ -313,11 +365,13 @@ footer p {
 <body>
 
 <header>
- <a href="Foto.jpg" target="_blank">
+  <a href="Foto.jpg" target="_blank">
   <img src="Foto.jpg" alt="Foto Muhammad Fizram">
- </a>
- <h1>Muhammad Fizram</h1>
- <h3>Mahasiswa & Operator Sales (Layouter)</h3>
+  </a>
+  <div class="info">
+    <h1>Muhammad Fizram</h1>
+    <h3>Mahasiswa & Operator Sales (Layouter)</h3>
+  </div>
 </header>
 
 <main>
@@ -353,7 +407,7 @@ footer p {
     <ul> 
       <li>Adobe Acrobat</li>
       <li>Adobe Photoshop</li>
-      <li>Adobe Illustrator</li>
+      <li>Adobe Ilustrator</li>
       <li>Corel Draw</li>
       <li>Figma</li>
       <li>Microsoft Word</li>
@@ -422,6 +476,19 @@ footer p {
 <footer>
   <p>© 2025 Muhammad Fizram</p>
 </footer>
+
+<script>
+    const header = document.querySelector('header');
+    const scrollThreshold = 50; 
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > scrollThreshold) {
+            header.classList.add('scrolled'); 
+        } else {
+            header.classList.remove('scrolled'); 
+        }
+    });
+</script>
 
 </body>
 </html>
