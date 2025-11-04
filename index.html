@@ -65,7 +65,7 @@ main {
   margin-bottom: -40px;
   background: url('Background.jpg') no-repeat center center;
   background-size: cover;
-  padding: 80px 0;
+  padding: 80px 0 140px; /* ditambah bawah agar tidak ketutup footer */
 }
 main::before {
   content: "";
@@ -100,24 +100,23 @@ section h2 {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+section p { text-align: justify; }
 
 /* Paragraf */
 section p b { color: #fff; }
 section p a {
-  color: #ffffff; /* jadi putih */
+  color: #ffffff;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 section p a:hover {
-  color: #ff0000; /* efek hover merah */
+  color: #ff0000;
   text-shadow: 0 0 10px #ff0000;
   text-decoration: underline;
 }
 
-section p { text-align: justify; }
-
-/* ==== UL & LI (Pendidikan, Pengalaman) ==== */
+/* ==== UL & LI ==== */
 ul {
   list-style: none;
   line-height: 1.2;
@@ -134,11 +133,7 @@ ul li {
   transition: background-color 0.3s ease;
 }
 ul li:hover { background-color: rgba(60, 60, 60, 0.9); }
-ul li b { 
-  display: block; 
-  margin-bottom: 2px; 
-  font-weight: 700; 
-} 
+ul li b { display: block; margin-bottom: 2px; font-weight: 700; } 
 ul li span.detail {
   display: block;
   font-size: 0.9em;
@@ -147,7 +142,7 @@ ul li span.detail {
   line-height: 1.2;
 }
 
-/* Pendidikan: dua kolom */
+/* Pendidikan dua kolom */
 main section:nth-of-type(2) ul {
   display: flex;
   flex-wrap: wrap;
@@ -158,42 +153,39 @@ main section:nth-of-type(2) ul li {
   margin-bottom: 20px;
 }
 
-/*  CSS KEHLIAN KOTAK KECIL HORIZONTAL */
+/* Keahlian (kotak kecil) */
 main section:nth-of-type(4) ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
 }
 main section:nth-of-type(4) ul li {
-    width: auto;
-    margin-bottom: 10px;
-    padding: 8px 15px; 
-    background: rgba(80, 0, 0, 0.9);
-    border-radius: 5px; 
-    border: 1px solid #ff0000; 
-    border-left: none; 
-    font-size: 0.9em;
-    font-weight: 600;
-    color: #fff;
-    transition: all 0.3s ease;
-    list-style: none; 
+  width: auto;
+  margin-bottom: 10px;
+  padding: 8px 15px; 
+  background: rgba(80, 0, 0, 0.9);
+  border-radius: 5px; 
+  border: 1px solid #ff0000; 
+  border-left: none; 
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #fff;
+  transition: all 0.3s ease;
 }
 main section:nth-of-type(4) ul li:hover {
-    background-color: #ff0000;
-    transform: translateY(-2px);
-    cursor: pointer;
+  background-color: #ff0000;
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
-
-/* CSS KONTAK BARU (LOGO GAMBAR ASLI) */
+/* Kontak */
 .contact { text-align: center; }
 .contact a { 
-    text-decoration: none; 
-    font-weight: bold; 
-    color: #ffaaaa; 
-} 
-
+  text-decoration: none; 
+  font-weight: bold; 
+  color: #ffaaaa; 
+}
 .contact-list {
   display: flex;
   justify-content: center; 
@@ -223,7 +215,6 @@ main section:nth-of-type(4) ul li:hover {
   text-shadow: 0 0 10px #ff0000;
   transform: translateY(-2px); 
 }
-/* Style untuk Gambar Logo */
 .contact-list img { 
   width: 35px; 
   height: 35px; 
@@ -231,11 +222,10 @@ main section:nth-of-type(4) ul li:hover {
   transition: transform 0.3s ease;
 }
 .contact-list a:hover img {
-    transform: scale(1.1); 
+  transform: scale(1.1); 
 }
 
-
-/* CSS SERTIFIKASI */
+/* Sertifikasi */
 #sertifikasi {
   margin: 40px auto;
   padding: 20px 30px; 
@@ -273,39 +263,49 @@ main section:nth-of-type(4) ul li:hover {
   box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
 }
 #sertifikasi ul li b {
-    display: block;
-    font-size: 1em;
-    font-weight: 700; 
-    color: #fff;
-    margin-bottom: 2px;
+  display: block;
+  font-size: 1em;
+  font-weight: 700; 
+  color: #fff;
+  margin-bottom: 2px;
 }
 #sertifikasi ul li span {
-    color: #ddd;
-    font-size: 0.9em;
-    display: inline-block;
-    margin-top: 0;
-    line-height: 1.2;
+  color: #ddd;
+  font-size: 0.9em;
+  display: inline-block;
+  line-height: 1.2;
 }
 @media (max-width: 768px) {
   #sertifikasi ul li { width: 100%; }
 }
 
-/* ==== FOOTER ==== */
+/* ==== FOOTER (LEMBUT TUMPANG TINDIH) ==== */
 footer {
-    text-align: center;
-    padding: 20px 20px 25px;
-    background: linear-gradient(135deg, #000000, #a00000); 
-    border-top: 3px solid #ff0000;
-    border-radius: 60px 60px 0 0; 
-    box-shadow: 0 -6px 25px rgba(255, 0, 0, 0.4);
-    position: relative;
-    z-index: 2;
-    margin-top: 40px; 
+  text-align: center;
+  padding: 20px 20px 25px;
+  background: linear-gradient(135deg, #000000, #a00000); 
+  border-top: 3px solid #ff0000;
+  border-radius: 60px 60px 0 0; 
+  box-shadow: 0 -6px 25px rgba(255, 0, 0, 0.4);
+  position: relative;
+  z-index: 3;
+  margin-top: -80px; /* efek tumpang tindih lembut */
+  backdrop-filter: blur(6px);
+}
+footer::before {
+  content: "";
+  position: absolute;
+  top: -40px; left: 0;
+  width: 100%; height: 40px;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  border-radius: 60px 60px 0 0;
+  z-index: -1;
 }
 footer p {
-    color: #ff4444;
-    font-size: 1.1em;
-    font-weight: 600;
+  color: #ff4444;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-shadow: 0 0 8px #000;
 }
 </style>
 </head>
@@ -353,7 +353,7 @@ footer p {
     <ul> 
       <li>Adobe Acrobat</li>
       <li>Adobe Photoshop</li>
-      <li>Adobe Ilustrator</li>
+      <li>Adobe Illustrator</li>
       <li>Corel Draw</li>
       <li>Figma</li>
       <li>Microsoft Word</li>
